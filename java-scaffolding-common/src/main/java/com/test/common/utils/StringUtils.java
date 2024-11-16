@@ -30,16 +30,36 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * Checks if a CharSequence is empty ("") or null.
+     * Checks if two CharSequence instances are equal
      *
-     * @param cs CharSequence (The CharSequence to be checked)
-     * @return boolean (true if the CharSequence is empty or null, false otherwise)
+     * @param cs1 CharSequence (The CharSequence to be checked)
+     * @param cs2 CharSequence (The CharSequence to check for)
+     * @return boolean
      */
     public static boolean equals(CharSequence cs1, CharSequence cs2) {
         return org.apache.commons.lang3.StringUtils.equals(cs1, cs2);
     }
 
+    /**
+     * Checks if two CharSequence instances are equal, ignoring case.
+     *
+     * @param cs1 CharSequence
+     * @param cs2 CharSequence
+     * @return boolean
+     */
+    public static boolean equalsIgnoreCase(CharSequence cs1, CharSequence cs2) {
+        return org.apache.commons.lang3.StringUtils.equalsIgnoreCase(cs1, cs2);
+    }
 
+    /**
+     * Checks if a CharSequence is empty ("") or null.
+     *
+     * @param cs CharSequence
+     * @return boolean
+     */
+    public static boolean isEmpty(CharSequence cs) {
+        return org.apache.commons.lang3.StringUtils.isEmpty(cs);
+    }
 
 
 }
