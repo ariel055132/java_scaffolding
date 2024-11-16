@@ -22,15 +22,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <lombok.version>1.18.34</lombok.version>
+        <junit-jupiter-api.version>5.11.3</junit-jupiter-api.version>
     </properties>
 
     <modules>
         <module>java-scaffolding-common</module>
     </modules>
 
-    <dependencyManagement>
         <dependencies>
-
             <!-- Lombok Setup (Log Module) -->
             <dependency>
                 <groupId>org.projectlombok</groupId>
@@ -38,6 +37,14 @@
                 <version>${lombok.version}</version>
             </dependency>
 
+            <!-- Unit Test Module -->
+            <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit-jupiter-api.version}</version>
+                <scope>test</scope>
+            </dependency>
+
         </dependencies>
-    </dependencyManagement>
 </project>
