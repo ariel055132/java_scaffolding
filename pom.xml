@@ -25,7 +25,7 @@
     </properties>
 
     <modules>
-        <module>java-scaffolding-utils</module>
+        <module>java-scaffolding-common</module>
     </modules>
 
     <dependencyManagement>
