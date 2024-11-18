@@ -91,4 +91,15 @@ public class StringUtilsTest {
         Assertions.assertFalse(actualResult);
     }
 
+    @Test
+    void testGetRepeatCount() {
+        // Given
+        String str = "Hello World, Hello World";
+        String repeat = "Hello";
+        // When
+        int actualResult = StringUtils.getRepeatCount(str, repeat);
+        // Then
+        Assertions.assertEquals(2, actualResult);
+    }
+
 }
