@@ -102,4 +102,15 @@ public class StringUtilsTest {
         Assertions.assertEquals(2, actualResult);
     }
 
+    @Test
+    void testSubString() {
+        // Given
+        String str = "Hello World";
+        int beginIndex = 6;
+        // When
+        String actualResult = StringUtils.substring(str, beginIndex);
+        // Then
+        Assertions.assertEquals("World", actualResult);
+    }
+
 }

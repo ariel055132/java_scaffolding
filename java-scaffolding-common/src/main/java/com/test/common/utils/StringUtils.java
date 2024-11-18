@@ -74,12 +74,45 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
+     * Checks if a CharSequence is empty ("") or null.
+     *
+     * @param cs CharSequence
+     * @return boolean
+     */
+    public static boolean isEmpty(CharSequence cs) {
+        return org.apache.commons.lang3.StringUtils.isEmpty(cs);
+    }
+
+    /**
+     * Extract substring from a given string, starting from a specific index
+     *
+     * @param str Given String
+     * @param start Starting index
+     * @return subString (substring from start index to end of the string)
+     */
+    public static String substring(String str, int start) {
+        return org.apache.commons.lang3.StringUtils.substring(str, start);
+    }
+
+    /**
+     * Extract substring from a given string, starting from a specific index to the end index
+     *
+     * @param str Given String
+     * @param start Starting index
+     * @param end Ending index
+     * @return subString (substring from start index to end index)
+     */
+    public static String substring(String str, int start, int end) {
+        return org.apache.commons.lang3.StringUtils.substring(str, start, end);
+    }
+
+    /**
      * Check if a given string contains any full-width characters
      *
-     * @param inputString
-     * @return
+     * @param inputString String
+     * @return true/false
      */
-    public static boolean containFullWidth(String inputString) {
+    public static boolean containsFullWidth(String inputString) {
         // 1. Check if the inputString is empty or null, if so, return false
         if (StringUtils.isEmpty(inputString)) {
             return false;
@@ -98,13 +131,27 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
-     * Checks if a CharSequence is empty ("") or null.
+     * Check if a given string contains any half-width characters
      *
-     * @param cs CharSequence
-     * @return boolean
+     * @param inputString String
+     * @return true/false
      */
-    public static boolean isEmpty(CharSequence cs) {
-        return org.apache.commons.lang3.StringUtils.isEmpty(cs);
+    public static boolean containsHalfWidth(String inputString) {
+        // 1. Check if the inputString is empty or null, if so, return false
+        if (StringUtils.isEmpty(inputString)) {
+            return false;
+        }
+        /* 2. Iterate through each character in the inputString
+         * For each character, it calls the isHalfWidth method to check if it is a half-width character
+         * If any character in the string is found to be a half-width character, return true
+         * Otherwise, return false
+         */
+        for (char c : inputString.toCharArray()) {
+            if (isHalfWidth(c)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -130,7 +177,7 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
      * @param c char
      * @return true/false
      */
-    public static boolean isHashWidth(char c) {
+    public static boolean isHalfWidth(char c) {
         return !isFullWidth(c);
     }
 
