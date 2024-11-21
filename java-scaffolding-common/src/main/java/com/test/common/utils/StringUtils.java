@@ -204,9 +204,10 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
+     * Convert a full-width string to half-width String
      *
      * @param fullWidthString
-     * @return
+     * @return half-width String
      */
     public static String convertToHalfWidth(String fullWidthString) {
         if (StringUtils.isEmpty(fullWidthString)) {
