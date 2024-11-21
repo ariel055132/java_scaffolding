@@ -6,6 +6,8 @@ import org.apache.commons.lang3.ObjectUtils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 
 /**
  * Date 日期時間共用函式
@@ -87,6 +89,57 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateTimePattern);
         return LocalDateTime.parse(dateTimeString, formatter);
     }
+
+    /**
+     * Calculate the difference between two dates (unit: days)
+     *
+     * @param startDate LocalDate (Start date)
+     * @param endDate LocalDate (End date)
+     */
+    public static Long getDateDifferenceAsDays(LocalDate startDate, LocalDate endDate) {
+        if (ObjectUtils.isEmpty(startDate) || ObjectUtils.isEmpty(endDate)) {
+            return null;
+        }
+        // Swap the dates if the start date is after the end date
+        if (startDate.isAfter(endDate)) {
+            LocalDate tmpDate = endDate;
+            startDate = endDate;
+            endDate = tmpDate;
+        }
+        return ChronoUnit.DAYS.between(startDate, endDate);
+    }
+
+    /**
+     * Retrieve the number of days in a specific month of a given year
+     *
+     * @param year year
+     * @param month month
+     * @return length of days in month
+     */
+    public static int getLengthOfDaysInMonth(int year, int month) {
+        return LocalDate.of(year, month, 1).lengthOfMonth();
+    }
+
+    /**
+     * Determine if the date is valid with user-defined pattern
+     *
+     * @param date String
+     * @param pattern String, user-defined pattern
+     * @return
+     */
+    public static boolean isValidDate(String date, String pattern) {
+        if (StringUtils.isEmpty(date) || StringUtils.isEmpty(pattern)) {
+            return false;
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        try {
+            LocalDate.parse(date, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
 
 
 }
