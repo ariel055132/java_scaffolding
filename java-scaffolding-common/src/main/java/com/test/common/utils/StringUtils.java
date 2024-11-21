@@ -181,4 +181,47 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         return !isFullWidth(c);
     }
 
+    /**
+     * Convert a half-width string to full-width
+     *
+     * @param halfWidthString
+     * @return full-width string
+     */
+    public static String convertToFullWidth(String halfWidthString) {
+        if (StringUtils.isEmpty(halfWidthString)) {
+            return halfWidthString;
+        }
+        char[] arr = halfWidthString.toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            int charValue = arr[i];
+            if (charValue >= 33 && charValue <= 126) {
+                arr[i] = (char) (charValue + 65248);
+            } else if (charValue == 32) {
+                arr[i] = (char) 12288;
+            }
+        }
+        return new String(arr);
+    }
+
+    /**
+     *
+     * @param fullWidthString
+     * @return
+     */
+    public static String convertToHalfWidth(String fullWidthString) {
+        if (StringUtils.isEmpty(fullWidthString)) {
+            return fullWidthString;
+        }
+        char[] arr = fullWidthString.toCharArray();
+        for (int i = 0; i < arr.length; i++) {
+            int charValue = arr[i];
+            if (charValue >= 65281 && charValue <= 65374) {
+                arr[i] = (char) (charValue - 65248);
+            } else if (charValue == 12288) {
+                arr[i] = (char) 32;
+            }
+        }
+        return new String(arr);
+    }
+
 }
