@@ -5,6 +5,7 @@ import org.apache.commons.lang3.ObjectUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.MinguoChronology;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
@@ -25,7 +26,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      * @return String
      */
     public static String localDateToString(LocalDate localDate) {
-        return ObjectUtils.isNotEmpty(localDate) ? localDate.format(DateConstants.YYYY_MM_DD) : StringUtils.EMPTY;
+        return ObjectUtils.isNotEmpty(localDate) ? localDate.format(DateConstants.YYYY_MM_DD_NOSPLIT) : StringUtils.EMPTY;
     }
 
     /**
@@ -125,7 +126,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
      *
      * @param date String
      * @param pattern String, user-defined pattern
-     * @return
+     * @return true/false
      */
     public static boolean isValidDate(String date, String pattern) {
         if (StringUtils.isEmpty(date) || StringUtils.isEmpty(pattern)) {
@@ -138,6 +139,19 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    /**
+     * Convert LocalDateTime to Minguo date format (yyyy-MM-dd)
+     *
+     * @param localDateTime
+     * @return
+     */
+    public static String formatMinGuoDate(LocalDateTime localDateTime) {
+        if (ObjectUtils.isEmpty(localDateTime)) {
+            return StringUtils.EMPTY;
+        }
+        return MinguoChronology.INSTANCE.localDateTime(localDateTime).format(DateConstants.MINGUO_FORMATTER_ISO);
     }
 
 
