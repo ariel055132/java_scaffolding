@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <commons-text.version>1.12.0</commons-text.version>
+        <commons-collections4.version>4.5.0-M2</commons-collections4.version>
     </properties>
 
     <dependencies>
@@ -26,6 +27,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
             <version>${commons-text.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4/4.5.0-M2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
         </dependency>
     </dependencies>
 
