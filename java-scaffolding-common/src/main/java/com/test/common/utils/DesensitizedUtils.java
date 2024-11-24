@@ -150,14 +150,64 @@ public class DesensitizedUtils {
     }
 
     /**
-     * TODO: 中文地址
+     * 中文地址
+     * 自第七碼（含）起以星號遮蔽
+     * chinese address
+     * Mask the address from the seventh digit (inclusive) with asterisks
+     * @param chineseAddress 中文地址 (Input Chinese Address)
+     * @return 處理後的中文地址 (Desensitized Chinese Address)
      */
+    public static String chineseAddress(String chineseAddress) {
+        if (StringUtils.isEmpty(chineseAddress)) {
+            return StringConstants.EMPTY;
+        }
+        chineseAddress = chineseAddress.trim();
+        int chineseAddressLength = chineseAddress.length();
+        if (chineseAddressLength < 7) {
+            return chineseAddress;
+        }
+        return chineseAddress.substring(0, 6) + StringConstants.STAR.repeat(chineseAddressLength - 6);
+    }
 
     /**
-     * TODO: 英文地址
+     * 英文地址
+     * 自第四碼（含）起以星號遮蔽
+     * english address
+     * Mask the address from the fourth digit (inclusive) with asterisks
+     * @param englishAddress 英文地址 (Input English Address)
+     * @return 處理後的英文地址 (Desensitized English Address)
      */
+    public static String englishAddress(String englishAddress) {
+        if (StringUtils.isEmpty(englishAddress)) {
+            return StringConstants.EMPTY;
+        }
+        englishAddress = englishAddress.trim();
+        int englishAddressLength = englishAddress.length();
+        if (englishAddressLength < 4) {
+            return englishAddress;
+        }
+        return englishAddress.substring(0, 4) + StringConstants.STAR.repeat(englishAddressLength - 4);
+    }
 
     /**
-     * TODO: 電子郵件
+     * 電子郵件
+     * 以星號遮蔽第二碼（含）至五碼
+     * Email
+     * Mask the second digit (inclusive) to the fifth digit with asterisks
+     * @param email 電子郵件 (Input Email)
+     * @return 處理後的電子郵件 (Desensitized Email)
      */
+    public static String email(String email) {
+        if (StringUtils.isEmpty(email)) {
+            return StringConstants.EMPTY;
+        }
+        email = email.trim();
+        int emailLength = email.length();
+        if (emailLength < 2) {
+            return email;
+        } else if (emailLength < 6) {
+            return email.substring(0, 1) + StringConstants.STAR.repeat(emailLength - 1);
+        }
+        return email.substring(0, 2) + StringConstants.STAR.repeat(4) + email.substring(6, emailLength);
+    }
 }
