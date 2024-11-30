@@ -11,8 +11,8 @@ public class ServiceRs<T> implements Serializable {
         return this.content;
     }
 
-    public T setContent(T content) {
-        return this.content = content;
+    public void setContent(T content) {
+        this.content = content;
     }
 
     // Constructor
