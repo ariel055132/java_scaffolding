@@ -12,11 +12,33 @@ public class ServiceInfo implements Serializable {
     // 時間戳記
     private LocalDateTime timeStamp = LocalDateTime.now();
 
+    // 誰發起的請求
+    private String userId;
+
+    // 是否成功
+    private boolean status;
+
     public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
 
     public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }
