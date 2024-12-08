@@ -31,7 +31,7 @@ public class PasswordValidator implements ConstraintValidator<PasswordRule, Stri
             }
         }
 
-        boolean result = this.isValidPassword(numberCount, lowerLetterCount, upperLetterCount, nonAlphaNumCount);
+        boolean result = this.isValidPassword(password, numberCount, lowerLetterCount, upperLetterCount, nonAlphaNumCount);
         if (!result) {
             constraintValidatorContext.disableDefaultConstraintViolation();
             constraintValidatorContext.buildConstraintViolationWithTemplate(passwordRule.message()).addConstraintViolation();
@@ -39,8 +39,9 @@ public class PasswordValidator implements ConstraintValidator<PasswordRule, Stri
         return result;
     }
 
-    private boolean isValidPassword(int numberCount, int lowerLetterCount, int upperLetterCount, int nonAlphaNumCount) {
-        return numberCount >= passwordRule.number() &&
+    private boolean isValidPassword(String password, int numberCount, int lowerLetterCount, int upperLetterCount, int nonAlphaNumCount) {
+        return password != null &&
+                numberCount >= passwordRule.number() &&
                 lowerLetterCount >= passwordRule.lowerLetter() &&
                 upperLetterCount >= passwordRule.upperLetter() &&
                 nonAlphaNumCount >= passwordRule.nonAlphaNum();

@@ -15,8 +15,7 @@ public @interface PasswordRule {
     int number() default 1;
     int nonAlphaNum() default 0;
 
-    //String message() default "{javax.validation.constraints.NotNull.message}";
-    String message() default "密碼格式不符";
+    String message() default "{javax.validation.constraints.PASSWORD.message}";
 
     Class<?>[] groups() default {};
 
