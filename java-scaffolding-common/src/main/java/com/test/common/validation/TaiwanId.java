@@ -1,5 +1,6 @@
 package com.test.common.validation;
 
+import com.test.common.validation.enums.TaiwanIdType;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -10,7 +11,15 @@ import java.lang.annotation.*;
 @Documented
 @Constraint(validatedBy = {TaiwanIdValidator.class})
 public @interface TaiwanId {
-    String message() default "Invalid Taiwan ID";
+    String TAIWAN_ID_MESSAGE = "{javax.validation.constraints.TAIWAN_ID.message}";
+
+    String FOREIGNER_ID_MESSAGE = "{javax.validation.constraints.FOREIGNER_ID.message}";
+
+    String COMPANY_ID_MESSAGE = "{javax.validation.constraints.COMPANY_ID.message}";
+
+    String message() default "{javax.validation.constraints.TAIWAN_ID.message}";
+
+    TaiwanIdType taiwanIdType() default TaiwanIdType.NATIVE;
 
     Class<?>[] groups() default {};
 
