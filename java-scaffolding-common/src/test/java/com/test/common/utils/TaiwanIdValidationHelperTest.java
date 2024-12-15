@@ -48,4 +48,31 @@ public class TaiwanIdValidationHelperTest {
         System.out.println(result);
         Assertions.assertEquals(result, true);
     }
+
+    @Test
+    @DisplayName("舊式外國人居留證號測試")
+    public void testIsValidOldForeignerTaiwanId() {
+        String id = "FA12345689";
+        boolean result = TaiwanIdValidationHelper.isOldForeignerTaiwanId(id);
+        System.out.println(result);
+        Assertions.assertEquals(result, true);
+    }
+
+    @Test
+    @DisplayName("舊式外國人居留證號測試")
+    public void testIsValidOldForeignerTaiwanId2() {
+        String id = "F112345678";
+        boolean result = TaiwanIdValidationHelper.isOldForeignerTaiwanId(id);
+        System.out.println(result);
+        Assertions.assertEquals(result, false);
+    }
+
+    @Test
+    @DisplayName("新式外國人居留證號測試")
+    public void testIsValidNewForeignerTaiwanId() {
+        String id = "A123456789";
+        boolean result = TaiwanIdValidationHelper.isNewForeignerTaiwanId(id);
+        System.out.println(result);
+        Assertions.assertEquals(result, true);
+    }
 }

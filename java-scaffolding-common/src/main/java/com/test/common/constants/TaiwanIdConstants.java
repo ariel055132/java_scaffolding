@@ -10,6 +10,12 @@ public class TaiwanIdConstants {
     // 台灣公司統一編號正則表達式
     public static final Pattern TAIWAN_COMPANY_PATTERN = Pattern.compile("\\d{8}");
 
+    // 舊式外國人居留證號正則表達式
+    public static final Pattern OLD_FOREIGNER_ID_PATTERN = Pattern.compile("[A-Z][ABCD]\\d{8}");
+
+    // 新式外國人居留證號正則表達式
+    public static final Pattern NEW_FOREIGNER_ID_PATTERN = Pattern.compile("[A-Z][89]\\d{8}");
+
     // 台灣身分證字號邏輯乘數
     public static final int[] TAIWAN_ID_LOGIC_MULTIPLIERS = {1, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1};
 

@@ -50,8 +50,14 @@ public class TaiwanIdValidationHelper {
         return sum % 10 == remainder;
     }
 
+    /**
+     * 檢查輸入是否為有效的外國人居留證號 (E.G: A123456789 (新式) / AB30132399 (舊式))
+     *
+     * @param id
+     * @return
+     */
     public static boolean isValidForeignerTaiwanId(String id) {
-        return true;
+        return isOldForeignerTaiwanId(id) || isNewForeignerTaiwanId(id);
     }
 
     /**
@@ -99,6 +105,45 @@ public class TaiwanIdValidationHelper {
      */
     public static boolean isValidTaiwanIdFormat(String id) {
         return StringUtils.length(id) == 10 && TaiwanIdConstants.TAIWAN_ID_PATTERN.matcher(id).matches() && (id.charAt(1) == '1' || id.charAt(1) == '2');
+    }
+
+    /**
+     * 檢查輸入是否為有效的舊式外國人居留證號格式 (E.G: AB30132399 (舊式))
+     *
+     * @param customerId
+     * @return
+     */
+    public static boolean isOldForeignerTaiwanId(String customerId) {
+        customerId = StringUtils.upperCase(customerId);
+
+        // 1. 長度不為 10碼 && 舊式統一證號格式錯誤, 回傳 false
+        if (customerId.length() != 10 && TaiwanIdConstants.OLD_FOREIGNER_ID_PATTERN.matcher(customerId).matches()) {
+            return false;
+        }
+        // 2. 次碼的性別碼，也是需要依照台灣地區代碼對照表將其轉成二位數字後，只取其個位數，如 A 就會被轉換成 0。
+        int areaNumber = TaiwanIdConstants.areaMap.get(customerId.charAt(0));
+        int genderNumber = areaNumber % 10;
+
+        // 3. 將轉換完成的數值，乘上相對應的權重(==台灣身份證字號)後進行加總，最後將加總的結果除以 10，若餘數為 0，則表示該身分證號碼為正確，否則為錯誤。
+        String idNumber = String.valueOf(areaNumber) + String.valueOf(genderNumber) + customerId.substring(2);
+        return checkSum(idNumber, TaiwanIdConstants.TAIWAN_ID_LOGIC_MULTIPLIERS, 0);
+    }
+
+    /**
+     * 檢查輸入是否為有效的新式外國人居留證號格式 (E.G: A123456789 (新式))
+     *
+     * @param customerId
+     * @return
+     */
+    public static boolean isNewForeignerTaiwanId(String customerId) {
+        customerId = StringUtils.upperCase(customerId);
+
+        // 1. 長度不為 10碼 && 新式統一證號格式錯誤, 回傳 false
+        if (customerId.length() != 10 && TaiwanIdConstants.NEW_FOREIGNER_ID_PATTERN.matcher(customerId).matches()) {
+            return false;
+        }
+        // 2. 同一般身分證字號檢核
+        return isValidTaiwanId(customerId);
     }
 
     /**
