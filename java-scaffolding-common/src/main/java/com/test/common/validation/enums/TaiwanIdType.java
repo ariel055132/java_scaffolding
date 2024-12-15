@@ -1,19 +1,19 @@
 package com.test.common.validation.enums;
 
+import com.test.common.validation.TaiwanId;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
 public enum TaiwanIdType {
-    NATIVE("{javax.validation.constraints.TAIWAN_ID.message}"),
-
-    FOREIGNER("{javax.validation.constraints.FOREIGNER.message}"),
-
-    COMPANY("{javax.validation.constraints.COMPANY_ID.message}"),
+    // 台灣身分證
+    NATIVE(TaiwanId.TAIWAN_ID_MESSAGE),
+    // 居留證
+    FOREIGNER(TaiwanId.FOREIGNER_MESSAGE),
+    // 公司統編
+    COMPANY(TaiwanId.COMPANY_MESSAGE),
     ;
+
+    @Getter
     String message;
-
-    private TaiwanIdType(String message) {
-        this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
-    }
 }

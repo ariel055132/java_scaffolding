@@ -13,9 +13,9 @@ import java.lang.annotation.*;
 public @interface TaiwanId {
     String TAIWAN_ID_MESSAGE = "{javax.validation.constraints.TAIWAN_ID.message}";
 
-    String FOREIGNER_ID_MESSAGE = "{javax.validation.constraints.FOREIGNER_ID.message}";
+    String FOREIGNER_MESSAGE = "{javax.validation.constraints.FOREIGNER_ID.message}";
 
-    String COMPANY_ID_MESSAGE = "{javax.validation.constraints.COMPANY_ID.message}";
+    String COMPANY_MESSAGE = "{javax.validation.constraints.COMPANY_ID.message}";
 
     String message() default "{javax.validation.constraints.TAIWAN_ID.message}";
 

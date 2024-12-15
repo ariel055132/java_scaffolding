@@ -16,13 +16,17 @@ public class TaiwanIdValidator implements ConstraintValidator<TaiwanId, String> 
     @Override
     public boolean isValid(String id, ConstraintValidatorContext constraintValidatorContext) {
         boolean isValidTaiwanId = this.isValidTaiwanId(id);
-        return false;
+        if (!isValidTaiwanId) {
+            constraintValidatorContext.disableDefaultConstraintViolation();
+            constraintValidatorContext.buildConstraintViolationWithTemplate(this.taiwanId.taiwanIdType().getMessage()).addConstraintViolation();
+        }
+        return true;
     }
 
     private boolean isValidTaiwanId(String id) {
         switch(this.taiwanId.taiwanIdType()) {
             case NATIVE:
-                return TaiwanIdValidationHelper.isValidNativeTaiwanId(id);
+                return TaiwanIdValidationHelper.isValidTaiwanId(id);
             case FOREIGNER:
                 return TaiwanIdValidationHelper.isValidForeignerTaiwanId(id);
             case COMPANY:
