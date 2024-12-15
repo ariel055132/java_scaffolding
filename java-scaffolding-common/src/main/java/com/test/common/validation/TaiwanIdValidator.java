@@ -30,7 +30,7 @@ public class TaiwanIdValidator implements ConstraintValidator<TaiwanId, String> 
             case FOREIGNER:
                 return TaiwanIdValidationHelper.isValidForeignerTaiwanId(id);
             case COMPANY:
-                return TaiwanIdValidationHelper.isValidCompanyTaiwanId(id);
+                return TaiwanIdValidationHelper.isValidTaiwanCompanyId(id);
             default:
                 return true;
         }

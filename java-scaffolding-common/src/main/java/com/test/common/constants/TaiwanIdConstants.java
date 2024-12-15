@@ -7,8 +7,14 @@ public class TaiwanIdConstants {
     // 台灣身分證字號正則表達式
     public static final Pattern TAIWAN_ID_PATTERN = Pattern.compile("[A-Z][12]\\d{8}");
 
+    // 台灣公司統一編號正則表達式
+    public static final Pattern TAIWAN_COMPANY_PATTERN = Pattern.compile("\\d{8}");
+
     // 台灣身分證字號邏輯乘數
     public static final int[] TAIWAN_ID_LOGIC_MULTIPLIERS = {1, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1};
+
+    // 台灣公司統一編號邏輯乘數
+    public static final int[] TAIWAN_COMPANY_LOGIC_MULTIPLIERS = {1, 2, 1, 2, 1, 2, 4, 1};
 
     // 台灣地區代碼對照表
     public static HashMap<Character, Integer> areaMap = new HashMap<>();
