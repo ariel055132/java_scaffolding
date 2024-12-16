@@ -11,11 +11,11 @@ import java.lang.annotation.*;
 @Documented
 @Constraint(validatedBy = {TaiwanIdValidator.class})
 public @interface TaiwanId {
-    String TAIWAN_ID_MESSAGE = "{javax.validation.constraints.TAIWAN_ID.message}";
+    final String TAIWAN_ID_MESSAGE = "{javax.validation.constraints.TAIWAN_ID.message}";
 
-    String FOREIGNER_MESSAGE = "{javax.validation.constraints.FOREIGNER_ID.message}";
+    final String FOREIGNER_MESSAGE = "{javax.validation.constraints.FOREIGNER_ID.message}";
 
-    String COMPANY_MESSAGE = "{javax.validation.constraints.COMPANY_ID.message}";
+    final String COMPANY_MESSAGE = "{javax.validation.constraints.COMPANY_ID.message}";
 
     String message() default "{javax.validation.constraints.TAIWAN_ID.message}";
 

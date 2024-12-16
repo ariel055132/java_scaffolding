@@ -75,4 +75,13 @@ public class TaiwanIdValidationHelperTest {
         System.out.println(result);
         Assertions.assertEquals(result, true);
     }
+
+    @Test
+    @DisplayName("外國人居留證號測試")
+    public void testValidForeignerTaiwanId() {
+        String id = "FA12345689";
+        boolean result = TaiwanIdValidationHelper.isValidForeignerTaiwanId(id);
+        System.out.println(result);
+        Assertions.assertEquals(true, result);
+    }
 }

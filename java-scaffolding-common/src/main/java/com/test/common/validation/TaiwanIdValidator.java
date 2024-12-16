@@ -5,26 +5,32 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class TaiwanIdValidator implements ConstraintValidator<TaiwanId, String> {
-    private TaiwanId taiwanId;
+    private TaiwanId constraintAnnotation;
 
     @Override
     public void initialize(TaiwanId constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
-        this.taiwanId = constraintAnnotation;
+        this.constraintAnnotation = constraintAnnotation;
     }
 
     @Override
     public boolean isValid(String id, ConstraintValidatorContext constraintValidatorContext) {
-        boolean isValidTaiwanId = this.isValidTaiwanId(id);
-        if (!isValidTaiwanId) {
-            constraintValidatorContext.disableDefaultConstraintViolation();
-            constraintValidatorContext.buildConstraintViolationWithTemplate(this.taiwanId.taiwanIdType().getMessage()).addConstraintViolation();
+        boolean result = this.isValidTaiwanId(id);
+        if (!result) {
+            this.buildMessage(constraintValidatorContext);
         }
-        return true;
+        return result;
+    }
+
+    private void buildMessage(ConstraintValidatorContext constraintValidatorContext) {
+        if (TaiwanId.TAIWAN_ID_MESSAGE.equals(constraintAnnotation.message())) {
+            constraintValidatorContext.disableDefaultConstraintViolation();
+            constraintValidatorContext.buildConstraintViolationWithTemplate(constraintAnnotation.taiwanIdType().getMessage())
+                    .addConstraintViolation();
+        }
     }
 
     private boolean isValidTaiwanId(String id) {
-        switch(this.taiwanId.taiwanIdType()) {
+        switch(constraintAnnotation.taiwanIdType()) {
             case NATIVE:
                 return TaiwanIdValidationHelper.isValidTaiwanId(id);
             case FOREIGNER:
@@ -32,7 +38,8 @@ public class TaiwanIdValidator implements ConstraintValidator<TaiwanId, String> 
             case COMPANY:
                 return TaiwanIdValidationHelper.isValidTaiwanCompanyId(id);
             default:
-                return true;
+                break;
         }
+        return true;
     }
 }
