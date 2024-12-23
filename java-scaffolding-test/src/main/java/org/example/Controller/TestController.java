@@ -19,4 +19,9 @@ public class TestController {
     public Result test(@RequestBody @Validated People rq) {
         return testService.testPeople(rq);
     }
+
+    @GetMapping("/testGet")
+    public Result insertForGet(@RequestParam String name) {
+        return Result.successResult();
+    }
 }

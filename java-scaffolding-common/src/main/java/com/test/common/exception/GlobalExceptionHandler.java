@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,6 +21,10 @@ import java.util.List;
 
 /**
  * 全局異常處理
+ * 1. 確保統一的異常返回格式，減少code的重複量 + 提高可讀性
+ * 2. 確保異常的日誌記錄，方便後續的問題追蹤
+ * 3. 確保異常的統一處理，避免異常的傳遞，確保服務的穩定性（不會因為某個異常導致整個服務的異常）
+ * 4. 自定義錯誤介面，提高用戶體驗
  */
 
 @RestControllerAdvice
@@ -47,13 +53,41 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public final Result methodArgumentNotValidHandler(MethodArgumentNotValidException e) {
         String requestUrl = httpServletRequest.getRequestURI();
         log.error("Request URL'{}', Catch MethodArgumentNotValidException'{}'", requestUrl, e.getMessage());
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), getValidExceptionMsg(allErrors));
+    }
+
+    /**
+     * 使用錯的方法進行 calling，例如：POST的method使用了GET
+     *
+     * @param errors
+     * @return
+     */
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
+    public final Result methodNotAllowedHandler(HttpRequestMethodNotSupportedException e) {
+        String requestUrl = httpServletRequest.getRequestURI();
+        log.error("Request URL'{}', Catch HttpRequestMethodNotSupportedException'{}'", requestUrl, e.getMessage());
+        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+    }
+
+    /**
+     * GET Request時，缺少必要的參數
+     *
+     * @param e
+     * @return
+     */
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = {MissingServletRequestParameterException.class})
+    public final Result missingServletRequestParameterHandler(MissingServletRequestParameterException e) {
+        String requestUrl = httpServletRequest.getRequestURI();
+        log.error("Request URL'{}', Catch MissingServletRequestParameterException'{}'", requestUrl, e.getMessage());
+        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
 
