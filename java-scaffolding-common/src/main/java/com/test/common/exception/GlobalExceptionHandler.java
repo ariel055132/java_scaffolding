@@ -57,7 +57,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public final Result methodArgumentNotValidHandler(MethodArgumentNotValidException e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch MethodArgumentNotValidException'{}'", requestUrl, e.getMessage());
+        log.error("Request URL'{}', Catch MethodArgumentNotValidException with POST '{}'", requestUrl, e.getMessage());
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), getValidExceptionMsg(allErrors));
     }
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
     /**
      * 使用錯的方法進行 calling，例如：POST的method使用了GET
      *
-     * @param errors
+     * @param e
      * @return
      */
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
@@ -79,8 +79,8 @@ public class GlobalExceptionHandler {
     /**
      * GET Request時，缺少必要的參數
      *
-     * @param e
-     * @return
+     * @param MissingServletRequestParameterException e
+     * @return Result
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {MissingServletRequestParameterException.class})
@@ -90,6 +90,44 @@ public class GlobalExceptionHandler {
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
+    /**
+     * 業務異常
+     *
+     * @param BusinessException e
+     * @return Result
+     */
+    @ExceptionHandler(value = {BusinessException.class})
+    public final Result businessExceptionHandler(BusinessException e) {
+        String requestUrl = httpServletRequest.getRequestURI();
+        log.error("Request URL'{}', Catch BusinessException'{}'", requestUrl, e.getMessage());
+        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+    }
+
+    /**
+     * 運行時錯誤
+     *
+     * @param errors
+     * @return
+     */
+    @ExceptionHandler(value = {RuntimeException.class})
+    public final Result runtimeExceptionHandler(RuntimeException e) {
+        String requestUrl = httpServletRequest.getRequestURI();
+        log.error("Request URL'{}', Catch RuntimeException'{}'", requestUrl, e.getMessage());
+        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+    }
+
+    /**
+     * 系統級別異常
+     * (所有以上的錯誤均無法包含均會進入此處理)
+     * @param errors
+     * @return
+     */
+    @ExceptionHandler(value = {Throwable.class})
+    public final Result throwableExceptionHandler(Throwable e) {
+        String requestUrl = httpServletRequest.getRequestURI();
+        log.error("Request URL'{}', Catch Throwable'{}'", requestUrl, e.getMessage());
+        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+    }
 
     private String getValidExceptionMsg(List<ObjectError> errors) {
         if (!CollectionUtils.isEmpty(errors)) {
