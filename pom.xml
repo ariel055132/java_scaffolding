@@ -29,6 +29,7 @@
         <module>java-scaffolding-common</module>
         <module>java-scaffolding-test</module>
         <module>java-scaffolding-swagger</module>
+        <module>java-scaffolding-gen</module>
     </modules>
 
         <dependencies>
