@@ -15,10 +15,9 @@ jdbcSettings:
 #   - string value: the relative path from the project root directory.
 outputDirectory: "src/main/java"
 
-
-
-
-
+# The package name used when generating entity classes
+#   - string value: full package name
+packageName: "com.example.entity"
 
 # If you need to generate JPA 1 compatible entity classes as well, set the following attributes
 #   - boolean value: true if you need to generate JPA 1 compatible entities as well
