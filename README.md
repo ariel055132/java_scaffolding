@@ -12,3 +12,10 @@
 * java-scaffolding-gen: Code Generation module (Currently has entity generator)
 * java-scaffolding-swagger: Swagger module (API documentation)
 * java-scaffolding-test: Demo module.
+
+## Future Enhancements
+* Add sensitive data encryption/decryption.
+* Add standard swagger annotations.
+* Add more code generation templates. (Controller, Repository, Service, DTO...)
+* Add standard log functions.
+* More to come...
