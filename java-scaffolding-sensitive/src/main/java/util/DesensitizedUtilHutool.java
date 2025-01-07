@@ -1,3 +1,5 @@
+package util;
+
 import cn.hutool.core.util.DesensitizedUtil;
 
 /**
@@ -87,4 +89,30 @@ public class DesensitizedUtilHutool extends DesensitizedUtil {
     public static String ipv6(String ipv6Address) {
         return DesensitizedUtil.ipv6(ipv6Address);
     }
+
+    /**
+     * 中國地區的(固定)電話號碼脫敏
+     * Desensitization of fixed phone number in China
+     * 只顯示前四位，和最後的兩位，中間的數字以 * 表示
+     * E.G: 13800138000 -> 1380*****00
+     *
+     * @param fixedPhoneNumber String 脫敏前的(固定)電話號碼 (Fixed Phone number before desensitization)
+     * @return String 脫敏後的(固定)電話號碼 (Desensitized fixed phone number)
+     */
+    public static String fixedPhone(String fixedPhoneNumber) {
+        return DesensitizedUtil.fixedPhone(fixedPhoneNumber);
+    }
+
+    /**
+     * 中國地區的(行動)電話號碼脫敏
+     * Desensitization of mobile phone number in China
+     * 只顯示前三位，和最後的四位，其他的數字以 * 表示
+     *
+     * @param mobilePhoneNumber String 脫敏前的(行動)電話號碼 (Mobile phone number before desensitization)
+     * @return String 脫敏後的(行動)電話號碼 (Desensitized mobile phone number)
+     */
+    public static String mobilePhone(String mobilePhoneNumber) {
+        return DesensitizedUtil.mobilePhone(mobilePhoneNumber);
+    }
+
 }

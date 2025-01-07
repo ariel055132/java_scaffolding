@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import util.DesensitizedUtilHutool;
 
 public class DesensitizedUtilHutoolTest {
     @Test
@@ -71,6 +72,30 @@ public class DesensitizedUtilHutoolTest {
         String expectedResult = "2001:*:*:*:*:*:*:*";
         // When
         String actualResult = DesensitizedUtilHutool.ipv6(ipv6);
+        // Then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("中國(固定)電話號碼的脫敏測試")
+    void testFixedPhoneNumber() {
+        // Given
+        String fixedPhoneNumber = "13800138000";
+        String expectedResult = "1380*****00";
+        // When
+        String actualResult = DesensitizedUtilHutool.fixedPhone(fixedPhoneNumber);
+        // Then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("中國(行動)電話號碼的脫敏測試")
+    void testMobilePhoneNumber() {
+        // Given
+        String mobilePhoneNumber = "13524682210";
+        String expectedResult = "135****2210";
+        // When
+        String actualResult = DesensitizedUtilHutool.mobilePhone(mobilePhoneNumber);
         // Then
         Assertions.assertEquals(expectedResult, actualResult);
     }

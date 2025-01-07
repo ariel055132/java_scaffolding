@@ -32,6 +32,11 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool-all.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.test</groupId>
+            <artifactId>java-scaffolding-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
