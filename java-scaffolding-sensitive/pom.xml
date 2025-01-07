@@ -18,6 +18,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <hutool-all.version>5.8.35</hutool-all.version>
+        <java-scaffolding-common.version>1.0.0-SNAPSHOT</java-scaffolding-common.version>
+        <com.fasterxml.jackson.core.version>2.15.0</com.fasterxml.jackson.core.version>
     </properties>
 
     <description>
@@ -32,11 +34,25 @@
             <artifactId>hutool-all</artifactId>
             <version>${hutool-all.version}</version>
         </dependency>
+        <!-- Core Utils (exp. String Utils) -->
         <dependency>
             <groupId>com.test</groupId>
             <artifactId>java-scaffolding-common</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${java-scaffolding-common.version}</version>
         </dependency>
+        <!-- Adding annotation for desensitized with annotation -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${com.fasterxml.jackson.core.version}</version>
+        </dependency>
+        <!-- Adding databind for desensitized with annotation -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${com.fasterxml.jackson.core.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>
