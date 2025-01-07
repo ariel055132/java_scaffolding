@@ -30,6 +30,7 @@
         <module>java-scaffolding-test</module>
         <module>java-scaffolding-swagger</module>
         <module>java-scaffolding-gen</module>
+        <module>java-scaffolding-sensitive</module>
     </modules>
 
         <dependencies>
