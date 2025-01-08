@@ -1,4 +1,4 @@
-package util;
+package com.test.common.sensitive.util;
 
 import cn.hutool.core.util.DesensitizedUtil;
 

@@ -1,4 +1,4 @@
-package util;
+package com.test.common.sensitive.util;
 
 import com.test.common.constants.StringConstants;
 import com.test.common.utils.StringUtils;

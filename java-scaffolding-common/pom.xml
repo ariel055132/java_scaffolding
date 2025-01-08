@@ -19,6 +19,12 @@
 
         <commons-text.version>1.12.0</commons-text.version>
         <commons-collections4.version>4.5.0-M2</commons-collections4.version>
+        <spring-context.version>6.1.14</spring-context.version>
+
+        <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
+        <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
+        <jakarta.el.version>4.0.2</jakarta.el.version>
+        <tomcat-embed-core.version>11.0.2</tomcat-embed-core.version>
     </properties>
 
     <dependencies>
@@ -37,7 +43,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
-            <version>5.3.39</version>
+            <version>${spring-context.version}</version>
         </dependency>
         <!-- Spring Validation -->
         <dependency>
@@ -48,17 +54,17 @@
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
-            <version>3.0.2</version>
+            <version>${jakarta.validation-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>8.0.0.Final</version>
+            <version>${hibernate-validator.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
-            <version>4.0.2</version>
+            <version>${jakarta.el.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
         <!-- For Global Exception Handler-->
@@ -78,6 +84,7 @@
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-core</artifactId>
+            <version>${tomcat-embed-core.version}</version>
         </dependency>
 
 

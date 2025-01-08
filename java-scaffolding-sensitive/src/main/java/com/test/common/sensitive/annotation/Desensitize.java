@@ -2,8 +2,8 @@ package com.test.common.sensitive.annotation;
 
 import com.fasterxml.jackson.annotation.JacksonAnnotationsInside;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import config.DesensitizeSerializer;
-import enums.DesensitizeType;
+import com.test.common.sensitive.enums.DesensitizeType;
+import com.test.common.sensitive.config.DesensitizeSerializer;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
