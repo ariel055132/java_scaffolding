@@ -18,7 +18,7 @@ public @interface Desensitize {
     /**
      * 脱敏类型
      */
-    DesensitizeType type();
+    DesensitizeType type() default DesensitizeType.CHINESE_NAME;
 
     /**
      * 開始位置

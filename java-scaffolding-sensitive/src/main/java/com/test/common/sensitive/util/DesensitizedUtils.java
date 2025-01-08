@@ -77,8 +77,8 @@ public class DesensitizedUtils {
      * 以星號遮蔽月及日
      * Birth Date
      * Mask the month and day with asterisks
-     * @param birthDate 出生年月日 (input birth date, format: YYYYMMDD)
-     * @return 處理後的出生年月日 (desensitized birth date, result format: YYYY****)
+     * @param birthDate 出生年月日 (input birthdate, format: YYYYMMDD)
+     * @return 處理後的出生年月日 (desensitized birthdate, result format: YYYY****)
      */
     public static String birthDate(String birthDate) {
         if (StringUtils.isEmpty(birthDate)) {

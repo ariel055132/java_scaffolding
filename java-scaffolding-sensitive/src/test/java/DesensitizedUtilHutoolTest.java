@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import util.DesensitizedUtilHutool;
+import com.test.common.sensitive.util.DesensitizedUtilHutool;
 
 public class DesensitizedUtilHutoolTest {
     @Test

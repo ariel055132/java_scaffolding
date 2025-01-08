@@ -9,10 +9,14 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.test.common.sensitive.enums.DesensitizeType;
 import com.test.common.sensitive.util.DesensitizedUtils;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.util.Objects;
 
+@NoArgsConstructor
+@AllArgsConstructor
 public class DesensitizeSerializer extends JsonSerializer<String> implements ContextualSerializer {
     private DesensitizeType type;
 
@@ -20,27 +24,22 @@ public class DesensitizeSerializer extends JsonSerializer<String> implements Con
 
     private Integer endIndex;
 
-    // Constructor
-    public DesensitizeSerializer() {
-
-    }
-
-    // Constructor
-    public DesensitizeSerializer(DesensitizeType type, Integer startIndex, Integer endIndex) {
-        this.type = type;
-        this.startIndex = startIndex;
-        this.endIndex = endIndex;
-    }
-
     @Override
     public void serialize(String value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+        String newStr;
         switch (type) {
-            case CHINESE_NAME:
-                jsonGenerator.writeString(DesensitizedUtils.chineseName(value));
-                break;
-            default:
-                break;
+            case CHINESE_NAME -> newStr = DesensitizedUtils.chineseName(value);
+            case ENGLISH_NAME -> newStr = DesensitizedUtils.englishName(value);
+            case BIRTH_DATE -> newStr = DesensitizedUtils.birthDate(value);
+            case ID_NUMBER -> newStr = DesensitizedUtils.idNumber(value);
+            case PHONE_NUMBER -> newStr = DesensitizedUtils.phoneNumber(value);
+            case CELL_PHONE_NUMBER -> newStr = DesensitizedUtils.cellPhoneNumber(value);
+            case CHINESE_ADDRESS -> newStr = DesensitizedUtils.chineseAddress(value);
+            case ENGLISH_ADDRESS -> newStr = DesensitizedUtils.englishAddress(value);
+            case EMAIL -> newStr = DesensitizedUtils.email(value);
+            default -> newStr = value;
         }
+        jsonGenerator.writeString(newStr);
     }
 
     @Override
