@@ -43,5 +43,9 @@ public enum DesensitizeType {
     /**
      * 電子郵件
      */
-    EMAIL
+    EMAIL,
+    /**
+     * 自定義 Rule
+     */
+    CUSTOM_RULE
 }

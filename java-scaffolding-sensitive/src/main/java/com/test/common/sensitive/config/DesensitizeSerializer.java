@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.test.common.sensitive.enums.DesensitizeType;
 import com.test.common.sensitive.util.DesensitizedUtils;
+import com.test.common.utils.StringUtils;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -28,16 +29,42 @@ public class DesensitizeSerializer extends JsonSerializer<String> implements Con
     public void serialize(String value, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         String newStr;
         switch (type) {
-            case CHINESE_NAME -> newStr = DesensitizedUtils.chineseName(value);
-            case ENGLISH_NAME -> newStr = DesensitizedUtils.englishName(value);
-            case BIRTH_DATE -> newStr = DesensitizedUtils.birthDate(value);
-            case ID_NUMBER -> newStr = DesensitizedUtils.idNumber(value);
-            case PHONE_NUMBER -> newStr = DesensitizedUtils.phoneNumber(value);
-            case CELL_PHONE_NUMBER -> newStr = DesensitizedUtils.cellPhoneNumber(value);
-            case CHINESE_ADDRESS -> newStr = DesensitizedUtils.chineseAddress(value);
-            case ENGLISH_ADDRESS -> newStr = DesensitizedUtils.englishAddress(value);
-            case EMAIL -> newStr = DesensitizedUtils.email(value);
-            default -> newStr = value;
+            case CHINESE_NAME:
+                newStr = DesensitizedUtils.chineseName(value);
+                break;
+            case ENGLISH_NAME:
+                newStr = DesensitizedUtils.englishName(value);
+                break;
+            case BIRTH_DATE:
+                newStr = DesensitizedUtils.birthDate(value);
+                break;
+            case ID_NUMBER:
+                newStr = DesensitizedUtils.idNumber(value);
+                break;
+            case PHONE_NUMBER:
+                newStr = DesensitizedUtils.phoneNumber(value);
+                break;
+            case CELL_PHONE_NUMBER:
+                newStr = DesensitizedUtils.cellPhoneNumber(value);
+                break;
+            case CHINESE_ADDRESS:
+                newStr = DesensitizedUtils.chineseAddress(value);
+                break;
+            case ENGLISH_ADDRESS:
+                newStr = DesensitizedUtils.englishAddress(value);
+                break;
+            case EMAIL:
+                newStr = DesensitizedUtils.email(value);
+                break;
+            case CUSTOM_RULE:
+                if (StringUtils.isBlank(value)) {
+                    newStr = value;
+                } else {
+                    newStr = StringUtils.substring("*", startIndex, endIndex);
+                }
+                break;
+            default:
+                newStr = value;
         }
         jsonGenerator.writeString(newStr);
     }
