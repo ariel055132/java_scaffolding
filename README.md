@@ -22,7 +22,7 @@
 
 ## Future Enhancements
 - [x] Add sensitive data encryption. 
-- [ ] Add standard swagger annotations.
+- [x] Add standard swagger annotations. 
 - [ ] Add more code generation templates. (Controller, Repository, Service, DTO...)
 - [ ] Add standard log functions.
 - [ ] Json serialization and deserialization. 
