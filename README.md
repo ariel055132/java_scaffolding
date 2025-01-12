@@ -25,5 +25,8 @@
 - [x] Add standard swagger annotations. 
 - [ ] Add more code generation templates. (Controller, Repository, Service, DTO...)
 - [ ] Add standard log functions.
-- [ ] Json serialization and deserialization. 
+- [ ] Json serialization and deserialization.
+- [ ] Add more function in different utils.
+- [ ] Add more validation annotations.
+- [ ] Add more test cases.
 * More to come...
