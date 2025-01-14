@@ -1,4 +1,4 @@
-package com.test.common.utils;
+package com.test.common.validation;
 
 import com.test.common.validation.helper.TaiwanIdValidationHelper;
 import org.junit.jupiter.api.Assertions;

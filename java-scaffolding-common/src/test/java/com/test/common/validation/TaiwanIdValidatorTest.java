@@ -1,6 +1,5 @@
-package com.test.common.utils;
+package com.test.common.validation;
 
-import com.test.common.validation.TaiwanId;
 import com.test.common.validation.enums.TaiwanIdType;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;

@@ -1,6 +1,5 @@
-package com.test.common.utils;
+package com.test.common.validation;
 
-import com.test.common.validation.PasswordRule;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
