@@ -1,29 +1,20 @@
 package com.test.common.validation;
 
 import com.test.common.validation.enums.TaiwanIdType;
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
-import org.junit.jupiter.api.BeforeAll;
+import lombok.Data;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TaiwanIdValidatorTest {
-    private static Validator validator;
-
-    @BeforeAll
-    public static void setUp() {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        validator = factory.getValidator();
-    }
+public class TaiwanIdValidatorTest extends BaseValidatorTest {
 
     @Test
     @DisplayName("Test valid Taiwan ID")
     public void testValidTaiwanId() {
-        NativeClass testClass = new NativeClass("A123456789", TaiwanIdType.NATIVE);
+        NativeClass testClass = new NativeClass();
+        testClass.setId("A123456789");
         var violationSet = validator.validate(testClass);
         System.out.println(violationSet.toString());
         assertTrue(violationSet.isEmpty());
@@ -32,7 +23,8 @@ public class TaiwanIdValidatorTest {
     @Test
     @DisplayName("Test invalid Taiwan ID")
     public void testInvalidTaiwanId() {
-        NativeClass testClass = new NativeClass("A12345678", TaiwanIdType.NATIVE);
+        NativeClass testClass = new NativeClass();
+        testClass.setId("A12345678");
         var violationSet = validator.validate(testClass);
         System.out.println(violationSet.toString());
         assertFalse(violationSet.isEmpty());
@@ -41,7 +33,8 @@ public class TaiwanIdValidatorTest {
     @Test
     @DisplayName("Test valid Foreigner Taiwan ID")
     public void testValidForeignerTaiwanId() {
-        ForeignerClass testClass = new ForeignerClass("FA12345689", TaiwanIdType.FOREIGNER);
+        ForeignerClass testClass = new ForeignerClass();
+        testClass.setId("FA12345689");
         var violationSet = validator.validate(testClass);
         System.out.println(violationSet.toString());
         assertTrue(violationSet.isEmpty());
@@ -50,51 +43,32 @@ public class TaiwanIdValidatorTest {
     @Test
     @DisplayName("Test valid Company Taiwan ID")
     public void testValidCompanyTaiwanId() {
-        companyClass testClass = new companyClass("04595257", TaiwanIdType.COMPANY);
+        companyClass testClass = new companyClass();
+        testClass.setId("04595257");
         var violationSet = validator.validate(testClass);
         System.out.println(violationSet.toString());
         assertTrue(violationSet.isEmpty());
     }
 
+    @Data
     private static class NativeClass {
         @TaiwanId(taiwanIdType = TaiwanIdType.NATIVE)
-        private final String id;
+        private String id;
 
-        public NativeClass(String id, TaiwanIdType type) {
-            this.id = id;
-            this.setTaiwanIdType(type);
-        }
-
-        private void setTaiwanIdType(TaiwanIdType type) {
-
-        }
     }
 
+    @Data
     private static class ForeignerClass {
         @TaiwanId(taiwanIdType = TaiwanIdType.FOREIGNER)
-        private final String id;
+        private String id;
 
-        public ForeignerClass(String id, TaiwanIdType type) {
-            this.id = id;
-            this.setTaiwanIdType(type);
-        }
-
-        private void setTaiwanIdType(TaiwanIdType type) {
-
-        }
     }
 
+    @Data
     private static class companyClass {
         @TaiwanId(taiwanIdType = TaiwanIdType.COMPANY)
-        private final String id;
+        private String id;
 
-        public companyClass(String id, TaiwanIdType type) {
-            this.id = id;
-            this.setTaiwanIdType(type);
-        }
-
-        private void setTaiwanIdType(TaiwanIdType type) {
-
-        }
     }
+
 }

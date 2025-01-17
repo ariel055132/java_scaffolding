@@ -2,7 +2,6 @@ package com.test.common.validation;
 
 import jakarta.validation.ConstraintViolation;
 import lombok.Data;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,11 +11,6 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class LessThanValidationTest extends BaseValidatorTest {
-
-    @BeforeEach
-    void init() {
-        setUp();
-    }
 
     @Test
     @DisplayName("Test LessThan validation - startDate")
