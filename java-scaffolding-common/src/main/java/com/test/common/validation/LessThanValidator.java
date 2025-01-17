@@ -4,6 +4,11 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import java.lang.reflect.Field;
 
+/**
+ * Less Than Annotation Validator
+ */
+
+
 public class LessThanValidator implements ConstraintValidator<LessThan, Object> {
 
     private LessThan constraintAnnotation;
@@ -24,6 +29,7 @@ public class LessThanValidator implements ConstraintValidator<LessThan, Object> 
         }
 
         try {
+            // Retrieves the field names to be compared
             String fromField = fields[0];
             String toField = fields[1];
 

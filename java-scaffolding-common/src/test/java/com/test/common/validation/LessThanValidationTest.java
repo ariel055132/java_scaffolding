@@ -19,7 +19,7 @@ public class LessThanValidationTest extends BaseValidatorTest {
     }
 
     @Test
-    @DisplayName("Test LessThan validation")
+    @DisplayName("Test LessThan validation - startDate")
     public void testLessThanValidation() {
         LessThanTestClass lessThanTestClass = new LessThanTestClass();
         lessThanTestClass.setStartDate(LocalDate.of(2021, 1, 2));
