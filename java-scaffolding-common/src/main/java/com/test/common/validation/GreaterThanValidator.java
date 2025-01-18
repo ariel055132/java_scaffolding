@@ -2,21 +2,17 @@ package com.test.common.validation;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+
 import java.lang.reflect.Field;
 
-/**
- * Less Than Annotation Validator
- */
+public class GreaterThanValidator implements ConstraintValidator<GreaterThan, Object> {
 
-
-public class LessThanValidator implements ConstraintValidator<LessThan, Object> {
-
-    private LessThan constraintAnnotation;
+    private GreaterThan constraintAnnotation;
 
     private String[] fields;
 
     @Override
-    public void initialize(LessThan constraintAnnotation) {
+    public void initialize(GreaterThan constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
         this.constraintAnnotation = constraintAnnotation;
     }
@@ -51,11 +47,11 @@ public class LessThanValidator implements ConstraintValidator<LessThan, Object> 
             }
 
             // Compares the values and adds a constraint violation if the condition is not met
-            // If first value is not less than the second value -> constraint violation
+            // If first value is not greater than the second value -> constraint violation
             Comparable<Object> fromComparable = (Comparable<Object>) fromValue;
-            if (fromComparable.compareTo(toValue) >= 0) {
+            if (fromComparable.compareTo(toValue) <= 0) {
                 constraintValidatorContext.disableDefaultConstraintViolation();
-                constraintValidatorContext.buildConstraintViolationWithTemplate(String.format("'%s' must be less than '%s'", fromField, toField))
+                constraintValidatorContext.buildConstraintViolationWithTemplate(String.format("'%s' must be greater than '%s'", fromField, toField))
                         .addPropertyNode(fromField)
                         .addConstraintViolation();
                 return false;
@@ -63,6 +59,6 @@ public class LessThanValidator implements ConstraintValidator<LessThan, Object> 
         } catch (Exception e) {
             return false;
         }
-        return true;
+        return false;
     }
 }
