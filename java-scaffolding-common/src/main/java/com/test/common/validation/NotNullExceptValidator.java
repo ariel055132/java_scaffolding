@@ -11,12 +11,12 @@ import org.springframework.util.ObjectUtils;
 import java.lang.reflect.Field;
 
 /**
- * Not Blank Except Annotation Validator
- * For dealing situation that some field should not be blank except some condition
- * Especially for String field
+ * Not Null Except Annotation Validator
+ * For dealing situation that some field should not be null except some condition
+ * Especially for non-String field
  */
 
-public class NotBlankExceptValidator implements ConstraintValidator<NotBlankExcept, Object> {
+public class NotNullExceptValidator implements ConstraintValidator<NotNullExcept, Object> {
     private String field;
 
     private String condition;
@@ -24,7 +24,7 @@ public class NotBlankExceptValidator implements ConstraintValidator<NotBlankExce
     private String message;
 
     @Override
-    public void initialize(NotBlankExcept constraintAnnotation) {
+    public void initialize(NotNullExcept constraintAnnotation) {
         this.field = constraintAnnotation.field();
         this.condition = constraintAnnotation.condition();
         this.message = constraintAnnotation.message();
@@ -41,7 +41,6 @@ public class NotBlankExceptValidator implements ConstraintValidator<NotBlankExce
             targetField.setAccessible(true);
             Object targetFieldValue = targetField.get(value);
 
-            //if (targetFieldValue instanceof String && ((String) targetFieldValue).isEmpty()) {
             if (ObjectUtils.isEmpty(targetFieldValue)) {
                 ExpressionParser parser = new SpelExpressionParser();
                 StandardEvaluationContext evaluationContext = new StandardEvaluationContext(value);
@@ -49,10 +48,10 @@ public class NotBlankExceptValidator implements ConstraintValidator<NotBlankExce
                 Boolean result = expression.getValue(evaluationContext, Boolean.class);
                 if (Boolean.FALSE.equals(result)) {
                     constraintValidatorContext.disableDefaultConstraintViolation();
-                    constraintValidatorContext.buildConstraintViolationWithTemplate(this.message)
+                    constraintValidatorContext.buildConstraintViolationWithTemplate(message)
                             .addPropertyNode(field)
                             .addConstraintViolation();
-                    return true;
+                    return false;
                 }
             }
             return true;

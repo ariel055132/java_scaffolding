@@ -6,17 +6,17 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = {NotBlankExceptValidator.class})
+@Constraint(validatedBy = {NotNullExceptValidator.class})
 @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Repeatable(NotBlankExcept.List.class)
-public @interface NotBlankExcept {
+@Repeatable(NotNullExcept.List.class)
+public @interface NotNullExcept {
     // field and condition should be put in order, otherwise cannot be find in validator
     String field();
 
     String condition() default "";
 
-    String message() default "NotBlankExcept";
+    String message() default "NotNullExcept";
 
     Class<?>[] groups() default {};
 
@@ -26,6 +26,6 @@ public @interface NotBlankExcept {
     @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
     @Retention(RetentionPolicy.RUNTIME)
     public @interface List {
-        NotBlankExcept[] value();
+        NotNullExcept[] value();
     }
 }
