@@ -16,15 +16,22 @@ public class NotBlankExceptValidationTest extends BaseValidatorTest {
     public void testNotBlankExceptValidation() {
         NotBlankExceptTestClass notBlankExceptTestClass = new NotBlankExceptTestClass();
         notBlankExceptTestClass.setField1("");
-        notBlankExceptTestClass.setField2("");
+        notBlankExceptTestClass.setField2(null);
 
         Set<ConstraintViolation<NotBlankExceptTestClass>> violation = validator.validate(notBlankExceptTestClass);
+        System.out.println(violation.toString());
+        assertFalse(violation.isEmpty());
+
+        notBlankExceptTestClass.setField1(null);
+        notBlankExceptTestClass.setField2("");
+        violation = validator.validate(notBlankExceptTestClass);
         System.out.println(violation.toString());
         assertFalse(violation.isEmpty());
     }
 
     @Data
-    @NotBlankExcept(field = "field1", condition = "field1 != null && (field2 == null || field2.isEmpty())", message = "field2 can be blank if field1 is filled")
+    @NotBlankExcept(field = "field1", condition = "#{field2 != null}", message = "field1 and field2 cannot be blank at the same time")
+    @NotBlankExcept(field = "field2", condition = "#{field1 != null}", message = "field1 and field2 cannot be blank at the same time")
     public class NotBlankExceptTestClass {
         private String field1;
 
