@@ -26,6 +26,10 @@
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <jakarta.el.version>4.0.2</jakarta.el.version>
         <tomcat-embed-core.version>11.0.2</tomcat-embed-core.version>
+        <com.fasterxml.jackson.core.version>2.18.2</com.fasterxml.jackson.core.version>
+        <com.fasterxml.jackson.annotation.version>2.18.2</com.fasterxml.jackson.annotation.version>
+        <com.fasterxml.jackson.databind.version>2.18.2</com.fasterxml.jackson.databind.version>
+        <com.fasterxml.jackson.datatype-jsr310.version>2.18.2</com.fasterxml.jackson.datatype-jsr310.version>
     </properties>
 
     <dependencies>
@@ -93,7 +97,34 @@
             <artifactId>tomcat-embed-core</artifactId>
             <version>${tomcat-embed-core.version}</version>
         </dependency>
-
+        <!-- Jackson-Core -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${com.fasterxml.jackson.core.version}</version>
+        </dependency>
+        <!-- Jackson Annotation -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${com.fasterxml.jackson.annotation.version}</version>
+        </dependency>
+        <!-- Jackson Databind -->
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${com.fasterxml.jackson.databind.version}</version>
+        </dependency>
+        <!-- Jackson Datatype JSR310 -->
+        <!-- For processing LocalDate in Java version 8 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${com.fasterxml.jackson.datatype-jsr310.version}</version>
+        </dependency>
 
     </dependencies>
 
