@@ -84,6 +84,17 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
+     * Checks if a CharSequence is empty ("") and null.
+     * Stricter than isEmpty.
+     *
+     * @param cs CharSequence
+     * @return boolean
+     */
+    public static boolean isBlank(CharSequence cs) {
+        return org.apache.commons.lang3.StringUtils.isBlank(cs);
+    }
+
+    /**
      * Extract substring from a given string, starting from a specific index
      *
      * @param str Given String
