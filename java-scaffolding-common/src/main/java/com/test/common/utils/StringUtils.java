@@ -107,6 +107,34 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
     }
 
     /**
+     * Pad the existing string to the specified length
+     * If the size of existing string exceeds the desired size, return this string
+     * Pad the string in front of existing string
+     *
+     * @param str Given String
+     * @param size the desired length after padding
+     * @param padChar the character to pad the string with
+     * @return the padded string
+     */
+    public static String leftPad(String str, int size, char padChar) {
+        return org.apache.commons.lang3.StringUtils.leftPad(str, size, padChar);
+    }
+
+    /**
+     * Pad the existing string to the specified length
+     * If the size of existing string exceeds the desired size, return this string
+     * Pad the string after the existing string
+     *
+     * @param str Given String
+     * @param size the desired length after padding
+     * @param padChar the character to pad the string with
+     * @return the padded string
+     */
+    public static String rightPad(String str, int size, char padChar) {
+        return org.apache.commons.lang3.StringUtils.rightPad(str, size, padChar);
+    }
+
+    /**
      * Check if a given string contains any full-width characters
      *
      * @param inputString String

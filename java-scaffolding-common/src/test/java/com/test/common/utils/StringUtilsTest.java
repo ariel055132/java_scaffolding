@@ -2,11 +2,13 @@ package com.test.common.utils;
 
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StringUtilsTest {
 
     @Test
+    @DisplayName("Test Contains (Positive Test Case)")
     void testContains() {
         // Given
         String str = "Hello World";
@@ -18,6 +20,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test Contains with ignoring case (Positive Test Case)")
     void testContainsIgnoreCase() {
         // Given
         String str = "Hello World";
@@ -29,6 +32,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test Equals (Positive Test Case)")
     void testEquals() {
         // Given
         String cs1 = "Hello World";
@@ -40,6 +44,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test Equals with null case (Negative Test Case)")
     void testEqualsWithNull() {
         // Given
         String cs1 = "Hello World";
@@ -51,6 +56,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test Equals with ignoring case (Positive Test Case)")
     void testEqualsIgnoreCase() {
         // Given
         String cs1 = "Hello World";
@@ -62,6 +68,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test isEmpty with SPACE (Positive Test Case)")
     void testIsEmpty() {
         // Given
         String cs = "";
@@ -72,6 +79,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test isEmpty with null (Positive Test Case)")
     void testIsEmptyWithNull() {
         // Given
         String cs = null;
@@ -92,6 +100,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test getRepeatCount")
     void testGetRepeatCount() {
         // Given
         String str = "Hello World, Hello World";
@@ -103,6 +112,7 @@ public class StringUtilsTest {
     }
 
     @Test
+    @DisplayName("Test Substring with beginIndex only")
     void testSubString() {
         // Given
         String str = "Hello World";
@@ -111,6 +121,32 @@ public class StringUtilsTest {
         String actualResult = StringUtils.substring(str, beginIndex);
         // Then
         Assertions.assertEquals("World", actualResult);
+    }
+
+    @Test
+    @DisplayName("Test leftPad")
+    void testLeftPad() {
+        // Given
+        String str = "Hello";
+        int size = 10;
+        char padChar = '@';
+        // When
+        String actualResult = StringUtils.leftPad(str, size, padChar);
+        // Then
+        Assertions.assertEquals("@@@@@Hello", actualResult);
+    }
+
+    @Test
+    @DisplayName("Test rightPad")
+    void testRightPad() {
+        // Given
+        String str = "Hello";
+        int size = 10;
+        char padChar = '@';
+        // When
+        String actualResult = StringUtils.rightPad(str, size, padChar);
+        // Then
+        Assertions.assertEquals("Hello@@@@@", actualResult);
     }
 
 }
