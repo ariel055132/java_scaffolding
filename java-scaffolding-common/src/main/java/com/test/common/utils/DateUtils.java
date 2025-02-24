@@ -77,6 +77,20 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
     }
 
     /**
+     * Convert String to localDate by self-defined formatter
+     *
+     * @param date String (String to be converted)
+     * @param formatter DateTimeFormatter
+     * @return LocalDate
+     */
+    public static LocalDate stringToLocalDate(String date, DateTimeFormatter formatter) {
+        if (StringUtils.isEmpty(date) || ObjectUtils.isEmpty(formatter)) {
+            return null;
+        }
+        return LocalDate.parse(date, formatter);
+    }
+
+    /**
      * Convert String to localDateTime by self-defined pattern
      *
      * @param dateTimeString String (String to be converted)
