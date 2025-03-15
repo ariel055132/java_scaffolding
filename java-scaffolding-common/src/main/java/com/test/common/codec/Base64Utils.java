@@ -1,8 +1,9 @@
 package com.test.common.codec;
 
+import com.test.common.utils.CharsetUtils;
 import com.test.common.utils.StringUtils;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 
 public class Base64Utils extends org.apache.commons.codec.binary.Base64 {
     // Constructor
@@ -11,21 +12,18 @@ public class Base64Utils extends org.apache.commons.codec.binary.Base64 {
 
     /**
      * Encodes a string into its base64 representation.
-     * Encoding: UTF-8
+     * Encoding: UTF-8 (default)
      *
      * @param string The string to encode
      * @param charset The charset to use for encoding, if null then UTF-8 is used
      * @return The base64 representation of the string
      */
     public static String encodeToString(String string, String charset) {
-        if (StringUtils.isEmpty(charset)) {
-            return org.apache.commons.codec.binary.Base64.encodeBase64String(string.getBytes());
+        if (StringUtils.isBlank(charset)) {
+            return org.apache.commons.codec.binary.Base64.encodeBase64String(string.getBytes(CharsetUtils.CHARSET_UTF_8));
         }
-        try {
-            return org.apache.commons.codec.binary.Base64.encodeBase64String(string.getBytes(charset));
-        } catch (UnsupportedEncodingException e) {
-            return "Wrong/Unknown charset";
-        }
+        Charset actualCharset = CharsetUtils.charset(charset);
+        return org.apache.commons.codec.binary.Base64.encodeBase64String(string.getBytes(actualCharset));
     }
 
     /**
@@ -33,12 +31,18 @@ public class Base64Utils extends org.apache.commons.codec.binary.Base64 {
      * Encoding: UTF-8
      *
      * @param string The base64 encoded string to decode
+     * @param charset The charset to use for decoding, if null then UTF-8 is used
      * @return The original representation of the base64 encoded string
      */
-    public static String decodeToString(String string) {
-        return new String(org.apache.commons.codec.binary.Base64.decodeBase64(string));
+    public static String decodeToString(String string, String charset) {
+        if (StringUtils.isBlank(charset)) {
+            return new String(org.apache.commons.codec.binary.Base64.decodeBase64(string), CharsetUtils.CHARSET_UTF_8);
+        }
+        // Decode from Base64
+        byte[] decodedBytes = org.apache.commons.codec.binary.Base64.decodeBase64(string);
+        // Convert Bytes to String using the specified charset
+        String decodedString = new String(decodedBytes, CharsetUtils.charset(charset));
+        return decodedString;
     }
-
-
 
 }

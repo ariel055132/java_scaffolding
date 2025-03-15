@@ -27,8 +27,9 @@ public class Base64UtilsTest {
     void testDecodeBase64() {
         // Given
         String input = "Og==";
+        String charset = CharsetUtils.UTF_8;
         // When
-        String actualResult = Base64Utils.decodeToString(input);
+        String actualResult = Base64Utils.decodeToString(input, charset);
         // Then
         Assertions.assertEquals(":", actualResult);
     }
@@ -55,6 +56,19 @@ public class Base64UtilsTest {
         String charsetEnum = CharsetUtils.GBK;
         // When
         String actualResult = Base64Utils.encodeToString(input, charsetEnum);
+        // Then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Test decodeBase64 with Simplified Chinese (Encoding: GBK)")
+    void testDecodeBase64WithSimplifiedChineseGBK() {
+        // Given
+        String input = "tqm5urPJuabBory0yfrQp6OsMzDM7MTav8m527+016jH+NbQs/21pbbAvMa30dOwxqzN4rXEy/nT0MTayN2jrLW9xtrX1LavyKHP+6Gj";
+        String expectedResult = "订购成功立即生效，30天内可观看专区中除单独计费影片外的所有内容，到期自动取消。";
+        String charsetEnum = CharsetUtils.GBK;
+        // When
+        String actualResult = Base64Utils.decodeToString(input, charsetEnum);
         // Then
         Assertions.assertEquals(expectedResult, actualResult);
     }
