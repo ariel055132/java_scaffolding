@@ -48,22 +48,50 @@ public class LogUtils {
         logger.debug(message, args);
     }
 
+    /**
+     * Log level: error
+     *
+     * @param message
+     */
     public static void error(String message) {
         logger.error(message);
     }
 
+    /**
+     * Log level: error with parameters
+     *
+     * @param message
+     * @param args
+     */
     public static void error(String message, Object... args) {
         logger.error(message, args);
     }
 
+    /**
+     * Log level: error with throwable
+     *
+     * @param message
+     * @param throwable
+     */
     public static void error(String message, Throwable throwable) {
         logger.error(message, throwable);
     }
 
+    /**
+     * Log level: warn
+     *
+     * @param message
+     */
     public static void warn(String message) {
         logger.warn(message);
     }
 
+    /**
+     * Log level: warn with parameters
+     *
+     * @param message
+     * @param args
+     */
     public static void warn(String message, Object... args) {
         logger.warn(message, args);
     }
