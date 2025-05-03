@@ -32,6 +32,7 @@
         <com.fasterxml.jackson.datatype-jsr310.version>2.18.2</com.fasterxml.jackson.datatype-jsr310.version>
         <spring-web.version>6.1.14</spring-web.version>
         <slf4j-api.version>2.0.16</slf4j-api.version>
+        <logback-core.version>1.5.18</logback-core.version>
         <logback-classic.version>1.5.18</logback-classic.version>
     </properties>
 
@@ -94,6 +95,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback-core.version}</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
