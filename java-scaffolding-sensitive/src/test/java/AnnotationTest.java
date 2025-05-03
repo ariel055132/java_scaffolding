@@ -1,12 +1,11 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.test.common.utils.JsonUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class AnnotationTest {
     @Test
     @DisplayName("Test annotation")
-    void testAnnotation() throws JsonProcessingException {
+    void testAnnotation() {
         // Given
         DesensitizedAnnotationTest test = new DesensitizedAnnotationTest();
         test.setEnglishName("John Doe");
@@ -19,8 +18,7 @@ public class AnnotationTest {
         test.setEnglishAddress("No. 1, Sec. 1, Xinyi Rd., Xinyi Dist., Taipei City");
         test.setEmail("xinyi@yahoo.com");
         // Serialize to JSON
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonResult = objectMapper.writeValueAsString(test);
+        String jsonResult = JsonUtils.toJson(test);
         System.out.println(jsonResult);
     }
 }
