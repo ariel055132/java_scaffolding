@@ -36,15 +36,12 @@
                 <maxFileSize>10MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
             <!-- at most 30 days log files -->
-            <!-- <maxHistory>30</maxHistory> -->
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
     </appender>
 
+    <!-- setup log level -->
     <root level="DEBUG">
-        <appender-ref ref="STDOUT" />
-        <appender-ref ref="FILEOUT" />
-    </root>
-    <root level="INFO">
         <appender-ref ref="STDOUT" />
         <appender-ref ref="FILEOUT" />
     </root>
