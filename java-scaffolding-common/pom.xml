@@ -25,7 +25,8 @@
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
         <hibernate-validator.version>8.0.0.Final</hibernate-validator.version>
         <jakarta.el.version>4.0.2</jakarta.el.version>
-        <tomcat-embed-core.version>11.0.2</tomcat-embed-core.version>
+        <spring-boot-starter-validation.version>3.4.4</spring-boot-starter-validation.version>
+        <tomcat-embed-core.version>11.0.3</tomcat-embed-core.version>
         <com.fasterxml.jackson.core.version>2.18.2</com.fasterxml.jackson.core.version>
         <com.fasterxml.jackson.annotation.version>2.18.2</com.fasterxml.jackson.annotation.version>
         <com.fasterxml.jackson.databind.version>2.18.2</com.fasterxml.jackson.databind.version>
@@ -65,6 +66,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
+            <version>${spring-boot-starter-validation.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
         <dependency>
