@@ -61,10 +61,8 @@ public class Base32Utils extends Base32 {
      */
     public static String decodeToString(String string, String charset) {
         if (StringUtils.isBlank(charset)) {
-            base32.decode(string.getBytes(com.test.common.utils.CharsetUtils.CHARSET_UTF_8));
-            return string;
+            return decodeToString(string);
         }
-        base32.decode(string.getBytes(CharsetUtils.charset(charset)));
-        return string;
+        return new String(base32.decode(string.getBytes(CharsetUtils.charset(charset))));
     }
 }

@@ -20,6 +20,7 @@
         <commons-text.version>1.12.0</commons-text.version>
         <commons-collections4.version>4.5.0-M2</commons-collections4.version>
         <commons-codec.version>1.17.2</commons-codec.version>
+        <commons-io.version>2.19.0</commons-io.version>
         <spring-context.version>6.1.14</spring-context.version>
 
         <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
@@ -56,6 +57,12 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>

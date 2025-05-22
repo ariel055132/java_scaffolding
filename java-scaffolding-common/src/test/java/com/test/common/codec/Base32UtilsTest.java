@@ -16,4 +16,16 @@ public class Base32UtilsTest {
         // Then
         Assertions.assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    @DisplayName("Test decodeBase32 (Encoding: UTF-8)")
+    void testDecodeBase32() {
+        // Given
+        String input = "4S6KNZNOW3TJRL7EXCAOJOFK5GOZ5ZNYXDUZLP7HTKCOLLMX46WKNZFYWI======";
+        String expectedResult = "伦家是一个非常长的字符串";
+        // When
+        String actualResult = Base32Utils.decodeToString(input, null);
+        // Then
+        Assertions.assertEquals(expectedResult, actualResult);
+    }
 }
