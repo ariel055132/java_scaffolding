@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     /**
      * 異常處理
      *
-     * @param e
+     * @param e Exception
      * @return
      */
     @ExceptionHandler(Exception.class)
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     /**
      * 使用POST發Request時，參數驗證異常
      *
-     * @param e
+     * @param e MethodArgumentNotValidException
      * @return
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
     /**
      * 使用錯的方法進行 calling，例如：POST的method使用了GET
      *
-     * @param e
+     * @param e HttpRequestMethodNotSupportedException
      * @return
      */
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
@@ -79,7 +79,7 @@ public class GlobalExceptionHandler {
     /**
      * GET Request時，缺少必要的參數
      *
-     * @param MissingServletRequestParameterException e
+     * @param e MissingServletRequestParameterException
      * @return Result
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -93,7 +93,7 @@ public class GlobalExceptionHandler {
     /**
      * 業務異常
      *
-     * @param BusinessException e
+     * @param e BusinessException
      * @return Result
      */
     @ExceptionHandler(value = {BusinessException.class})

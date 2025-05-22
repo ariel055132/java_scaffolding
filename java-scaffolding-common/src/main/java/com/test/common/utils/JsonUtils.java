@@ -41,7 +41,9 @@ public class JsonUtils {
             return null;
         }
         try {
-            return objectMapper.writeValueAsString(object);
+            String jsonString = objectMapper.writeValueAsString(object);
+            LogUtils.info("JsonUtils.toJson success : {} ", jsonString);
+            return jsonString;
         } catch (JsonProcessingException e) {
             return null;
         }
@@ -66,6 +68,7 @@ public class JsonUtils {
         try {
             return objectMapper.readValue(json, objectClass);
         } catch (IOException e) {
+            LogUtils.debug("JsonUtils.toObject error: {}", e.getMessage());
             return null;
         }
     }
