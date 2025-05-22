@@ -2,10 +2,11 @@ package com.test.common.codec;
 
 import com.test.common.utils.CharsetUtils;
 import com.test.common.utils.StringUtils;
+import org.apache.commons.codec.binary.Base64;
 
 import java.nio.charset.Charset;
 
-public class Base64Utils extends org.apache.commons.codec.binary.Base64 {
+public class Base64Utils extends Base64 {
     // Constructor
     public Base64Utils() {
     }
