@@ -36,3 +36,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+/Users/adrianli/IdeaProjects/java_scaffolding/java-scaffolding-test/src/main/resources/application.properties
