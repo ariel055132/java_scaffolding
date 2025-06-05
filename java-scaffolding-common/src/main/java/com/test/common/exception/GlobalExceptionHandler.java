@@ -129,6 +129,12 @@ public class GlobalExceptionHandler {
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
+    /**
+     * 獲取參數驗證異常的錯誤訊息
+     *
+     * @param errors
+     * @return
+     */
     private String getValidExceptionMsg(List<ObjectError> errors) {
         if (!CollectionUtils.isEmpty(errors)) {
             StringBuilder sb = new StringBuilder();
