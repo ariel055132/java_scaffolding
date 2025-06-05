@@ -5,3 +5,4 @@ META-INF
 target
 *.iml
 logs
+/Users/adrianli/IdeaProjects/java_scaffolding/java-scaffolding-test/src/main/resources/application.properties
