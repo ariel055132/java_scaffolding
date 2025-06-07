@@ -2,9 +2,8 @@ package com.test.common.exception;
 
 import com.test.common.bean.Result;
 import com.test.common.enums.CodeEnum;
+import com.test.common.utils.LogUtils;
 import jakarta.servlet.http.HttpServletRequest;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.util.CollectionUtils;
@@ -29,8 +28,6 @@ import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
     @Autowired
     private HttpServletRequest httpServletRequest;
 
@@ -43,7 +40,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public Result exceptionHandler(Exception e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch System Exception'{}'", requestUrl, e);
+        LogUtils.error("Request URL'{}', Catch System Exception'{}'", requestUrl, e);
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
@@ -57,7 +54,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public final Result methodArgumentNotValidHandler(MethodArgumentNotValidException e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch MethodArgumentNotValidException with POST '{}'", requestUrl, e.getMessage());
+        LogUtils.error("Request URL'{}', Catch MethodArgumentNotValidException with POST '{}'", requestUrl, e.getMessage());
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), getValidExceptionMsg(allErrors));
     }
@@ -72,7 +69,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
     public final Result methodNotAllowedHandler(HttpRequestMethodNotSupportedException e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch HttpRequestMethodNotSupportedException'{}'", requestUrl, e.getMessage());
+        LogUtils.error("Request URL'{}', Catch HttpRequestMethodNotSupportedException'{}'", requestUrl, e.getMessage());
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
@@ -86,7 +83,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {MissingServletRequestParameterException.class})
     public final Result missingServletRequestParameterHandler(MissingServletRequestParameterException e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch MissingServletRequestParameterException'{}'", requestUrl, e.getMessage());
+        LogUtils.error("Request URL'{}', Catch MissingServletRequestParameterException'{}'", requestUrl, e.getMessage());
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
@@ -99,41 +96,41 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = {BusinessException.class})
     public final Result businessExceptionHandler(BusinessException e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch BusinessException'{}'", requestUrl, e.getMessage());
+        LogUtils.error("Request URL'{}', Catch BusinessException'{}'", requestUrl, e.getMessage());
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
      * 運行時錯誤
      *
-     * @param errors
+     * @param e RuntimeException
      * @return
      */
     @ExceptionHandler(value = {RuntimeException.class})
     public final Result runtimeExceptionHandler(RuntimeException e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch RuntimeException'{}'", requestUrl, e.getMessage());
+        LogUtils.error("Request URL'{}', Catch RuntimeException'{}'", requestUrl, e.getMessage());
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
      * 系統級別異常
      * (所有以上的錯誤均無法包含均會進入此處理)
-     * @param errors
-     * @return
+     * @param e Throwable errors
+     * @return Result
      */
     @ExceptionHandler(value = {Throwable.class})
     public final Result throwableExceptionHandler(Throwable e) {
         String requestUrl = httpServletRequest.getRequestURI();
-        log.error("Request URL'{}', Catch Throwable'{}'", requestUrl, e.getMessage());
+        LogUtils.error("Request URL'{}', Catch Throwable'{}'", requestUrl, e.getMessage());
         return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
      * 獲取參數驗證異常的錯誤訊息
      *
-     * @param errors
-     * @return
+     * @param List<ObjectError> errors
+     * @return String
      */
     private String getValidExceptionMsg(List<ObjectError> errors) {
         if (!CollectionUtils.isEmpty(errors)) {
