@@ -1,7 +1,8 @@
 package com.test.common.exception;
 
-import com.test.common.bean.Result;
-import com.test.common.enums.CodeEnum;
+import com.test.common.api.ResultCodeEnum;
+import com.test.common.api.ServiceRs;
+import com.test.common.api.ServiceRsBuilder;
 import com.test.common.utils.LogUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +39,10 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(Exception.class)
-    public Result exceptionHandler(Exception e) {
+    public ServiceRs exceptionHandler(Exception e) {
         String requestUrl = httpServletRequest.getRequestURI();
         LogUtils.error("Request URL'{}', Catch System Exception'{}'", requestUrl, e);
-        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ServiceRsBuilder.error(ResultCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
@@ -52,11 +53,11 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
-    public final Result methodArgumentNotValidHandler(MethodArgumentNotValidException e) {
+    public final ServiceRs methodArgumentNotValidHandler(MethodArgumentNotValidException e) {
         String requestUrl = httpServletRequest.getRequestURI();
         LogUtils.error("Request URL'{}', Catch MethodArgumentNotValidException with POST '{}'", requestUrl, e.getMessage());
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
-        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), getValidExceptionMsg(allErrors));
+        return ServiceRsBuilder.error(ResultCodeEnum.SYSTEM_ERROR.getCode(), getValidExceptionMsg(allErrors));
     }
 
     /**
@@ -67,10 +68,10 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
-    public final Result methodNotAllowedHandler(HttpRequestMethodNotSupportedException e) {
+    public final ServiceRs methodNotAllowedHandler(HttpRequestMethodNotSupportedException e) {
         String requestUrl = httpServletRequest.getRequestURI();
         LogUtils.error("Request URL'{}', Catch HttpRequestMethodNotSupportedException'{}'", requestUrl, e.getMessage());
-        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ServiceRsBuilder.error(ResultCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
@@ -81,10 +82,10 @@ public class GlobalExceptionHandler {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = {MissingServletRequestParameterException.class})
-    public final Result missingServletRequestParameterHandler(MissingServletRequestParameterException e) {
+    public final ServiceRs missingServletRequestParameterHandler(MissingServletRequestParameterException e) {
         String requestUrl = httpServletRequest.getRequestURI();
         LogUtils.error("Request URL'{}', Catch MissingServletRequestParameterException'{}'", requestUrl, e.getMessage());
-        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ServiceRsBuilder.error(ResultCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
@@ -94,10 +95,10 @@ public class GlobalExceptionHandler {
      * @return Result
      */
     @ExceptionHandler(value = {BusinessException.class})
-    public final Result businessExceptionHandler(BusinessException e) {
+    public final ServiceRs businessExceptionHandler(BusinessException e) {
         String requestUrl = httpServletRequest.getRequestURI();
         LogUtils.error("Request URL'{}', Catch BusinessException'{}'", requestUrl, e.getMessage());
-        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ServiceRsBuilder.error(ResultCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
@@ -107,10 +108,10 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = {RuntimeException.class})
-    public final Result runtimeExceptionHandler(RuntimeException e) {
+    public final ServiceRs runtimeExceptionHandler(RuntimeException e) {
         String requestUrl = httpServletRequest.getRequestURI();
         LogUtils.error("Request URL'{}', Catch RuntimeException'{}'", requestUrl, e.getMessage());
-        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ServiceRsBuilder.error(ResultCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
@@ -120,16 +121,16 @@ public class GlobalExceptionHandler {
      * @return Result
      */
     @ExceptionHandler(value = {Throwable.class})
-    public final Result throwableExceptionHandler(Throwable e) {
+    public final ServiceRs throwableExceptionHandler(Throwable e) {
         String requestUrl = httpServletRequest.getRequestURI();
         LogUtils.error("Request URL'{}', Catch Throwable'{}'", requestUrl, e.getMessage());
-        return Result.errorResult(CodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
+        return ServiceRsBuilder.error(ResultCodeEnum.SYSTEM_ERROR.getCode(), e.getMessage());
     }
 
     /**
      * 獲取參數驗證異常的錯誤訊息
      *
-     * @param List<ObjectError> errors
+     * @param errors List<ObjectError> 參數驗證錯誤列表
      * @return String
      */
     private String getValidExceptionMsg(List<ObjectError> errors) {
