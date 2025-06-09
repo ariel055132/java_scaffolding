@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.another;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/user")
-@Tag(name = "User", description = "User Management API")
-public class UserController {
+@RequestMapping("/api/another")
+@Tag(name = "Another", description = "Another API")
+public class AnotherController {
     @GetMapping("/get")
-    public String getUser() {
-        return "User details";
+    public String getAnother() {
+        return "Another details";
     }
-
 }

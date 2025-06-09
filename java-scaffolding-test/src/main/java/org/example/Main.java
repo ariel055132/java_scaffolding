@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootApplication()
 @Import(GlobalExceptionHandler.class)
-@ComponentScan(basePackages = {"org.example.controller"})
+@ComponentScan(basePackages = {"org.example.controller", "org.example.service"})
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
